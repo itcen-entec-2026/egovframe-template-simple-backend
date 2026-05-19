@@ -33,8 +33,8 @@ public class BBSAttributeManageDAO extends EgovAbstractMapper {
      *
      * @param BoardMaster
      */
-    public void deleteBBSMasterInf(BoardMaster boardMaster) throws Exception {
-    	update("BBSAttributeManageDAO.deleteBBSMasterInf", boardMaster);
+	public int deleteBBSMasterInf(BoardMaster boardMaster) {
+		return update("BBSAttributeManageDAO.deleteBBSMasterInf", boardMaster);
     }
 
     /**
