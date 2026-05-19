@@ -19,8 +19,7 @@
 | **자카르타 EE** | Jakarta EE 10 / Servlet 6.0 |
 | **빌드 도구** | Maven |
 | **ORM** | MyBatis (EgovFramework PSL) |
-| **쿼리** | QueryDSL (Jakarta) |
-| **데이터베이스** | HSQLDB (개발), MySQL (운영), Oracle/Altibase/Tibero/CUBRID 지원 |
+| **데이터베이스** | MySQL (개발), MySQL (운영) |
 | **인증** | JWT (jjwt 0.12.6) |
 | **API 문서** | SpringDoc OpenAPI (Swagger UI 2.6.0) |
 | **로깅** | Log4j2 2.25.3 / SLF4J 2.0.17 |
@@ -37,7 +36,7 @@ egovframe-template-simple-backend/
 ├── README.md                        # 프로젝트 설명 및 구동 가이드
 ├── swagger.md                       # Swagger API 문서
 ├── Docs/                            # 변환 가이드 문서군 (JavaConfig 등)
-├── DATABASE/                        # 데이터베이스 관련 문서
+├── DATABASE/                        # DB 스키마 (mysql)
 ├── src/
 │   ├── main/
 │   │   ├── java/egovframework/
@@ -141,7 +140,7 @@ server.port=8081
 | `prod` | 운영환경 |
 
 ### 주요 설정 항목 (`application.properties`)
-- `Globals.DbType`: 데이터베이스 타입 (`hsqldb`, `mysql`, `oracle`, `altibase`, `tibero`, `cubrid`)
+- `Globals.DbType`: 데이터베이스 타입 (`mysql`)
 - `Globals.pageUnit`: 페이지당 기본 건수 (기본: 10)
 - `Globals.fileStorePath`: 파일 저장 경로 (기본: `./files`)
 - `Globals.Allow.Origin`: CORS 허용 origin (기본: `http://localhost:3000`)
@@ -150,9 +149,7 @@ server.port=8081
 
 ### 데이터베이스 연결
 `Globals.DbType`에 따라 자동 전환되며, 각 DB별 연결 정보는 `application.properties`에서 설정:
-- HSQLDB: 내장 메모리 DB (개발용)
 - MySQL: `jdbc:log4jdbc:mysql://127.0.0.1:3306/sht`
-- 기타: Oracle, Altibase, Tibero, CUBRID
 
 ---
 
