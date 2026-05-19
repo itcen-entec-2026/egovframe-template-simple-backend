@@ -42,7 +42,7 @@ public class BBSAttributeManageDAO extends EgovAbstractMapper {
      *
      * @param BoardMaster
      */
-    public int insertBBSMasterInf(BoardMaster boardMaster) throws Exception {
+    public int insertBBSMasterInf(BoardMaster boardMaster) {
     	return insert("BBSAttributeManageDAO.insertBBSMasterInf", boardMaster);
     }
 
