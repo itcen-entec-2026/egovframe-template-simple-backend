@@ -156,3 +156,45 @@ String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHm
 - 테스트 메서드는 대상 클래스의 메서드 선언 순서대로 작성
 - 테스트 실행 및 검증 제외
 ```
+
+# 2026-05-20 수요일
+
+TestFileUtils.listFiles
+1. CmmUseDAO.java
+2. FileManageDAO.java
+3. BBSAddedOptionsDAO.java
+4. BBSAttributeManageDAO.java
+5. BBSLoneMasterDAO.java
+6. BBSManageDAO.java
+7. BBSUseInfoManageDAO.java
+8. EgovUserInfManageDAO.java
+9. IndvdlSchdulManageDao.java
+10. SiteManagerDAO.java
+11. LoginDAO.java
+12. MberManageDAO.java
+
+```
+    해당 문서의 내용을 확인했습니다. 문서 내용이 매우 간략하게 "단위 테스트 코드 생성"으로만 작성되어 있습니다.
+
+    어떤 부분을 단위 테스트로 작성해야 할지 구체적인 안내가 필요합니다:
+
+     1. 테스트 대상 클래스/모듈: 어떤 컨트롤러, 서비스, 또는 유틸리티 클래스를 테스트해야 하나요?
+     2. 테스트 범위: 전체 모듈을 테스트할지, 특정 기능만 테스트할지
+     3. 테스트 패턴: 기존 테스트 코드가 있다면 참고하여 동일한 패턴을 따를까요?
+
+    테스트가 필요한 대상 파일 목록이나 우선순위를 알려주시면 해당 패턴에 맞춰 단위 테스트 코드를 생성하겠습니다.
+```
+
+테스트 대상 클래스/모듈:
+- `4. BBSAttributeManageDAO.java`
+- LETTNBBSMASTER
+
+```
+## 대상
+- DAO: *DAO.java
+- 경로: /src/main/java/**/service/impl/**
+```
+
+```
+@"md/cen-단위 테스트 코드 생성_v0.1_이백행_2026-05-20.md"
+```
