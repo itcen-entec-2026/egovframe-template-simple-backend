@@ -16,7 +16,7 @@ class TestFileUtils {
 	@Test
 	void listFiles() {
 		if (log.isDebugEnabled()) {
-			log.debug("test");
+			log.debug("listFiles");
 		}
 
 		final File directory = new File("./src/main/java");
@@ -32,10 +32,12 @@ class TestFileUtils {
 
 		StringBuffer sb = new StringBuffer();
 
+		int i = 1;
 		for (File listFile : listFiles) {
 			String name = listFile.getName();
 
 			if (log.isDebugEnabled()) {
+				log.debug("i={}", i);
 				log.debug("listFile={}", listFile);
 				log.debug("name={}", name);
 			}
@@ -45,7 +47,11 @@ class TestFileUtils {
 			}
 
 			sb.append(System.lineSeparator());
+			sb.append(i);
+			sb.append(". ");
 			sb.append(name);
+
+			i++;
 		}
 
 		if (log.isDebugEnabled()) {
