@@ -1,7 +1,8 @@
 # 단위 테스트 생성 규칙
 
 ## 대상
-- DAO: @src/main/java/egovframework/let/cop/bbs/domain/repository/BBSAttributeManageDAO.java
+- DAO: `~DAO.java` 대상 DAO 파일을 자동 탐색하여 순차적으로 처리
+- 경로: /src/main/java/egovframework/**
 
 ## 규칙
 - @src/test/java/egovframework/let/cop/bbs/service/impl/BBSAttributeManageDAOTest.java 기존 테스트 클래스 패턴 100% 준수
