@@ -212,3 +212,20 @@ TestFileUtils.listFiles
 ```
 '전자정부 표준프레임워크 DAO 단위 테스트 코드 생성' 제미나이 프롬프트 md 다운로드
 ```
+
+```
+@"md/cen-단위 테스트 코드 생성_v0.1_이백행_2026-05-21.md"
+```
+
+```
+BBSAttributeManageDAO 단위 테스트 코드 생성
+- 클래스명: `{DAO명}CenTest`
+```
+
+```
+BBSAttributeManageDAO 단위 테스트 코드 생성
+- 클래스명: `{DAO명}CenTest`
+관련 경로
+- src/main/java/egovframework
+- src/main/resources/egovframework
+```

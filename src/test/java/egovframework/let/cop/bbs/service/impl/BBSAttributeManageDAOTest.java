@@ -5,9 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
-import org.egovframe.rte.fdl.cmmn.exception.FdlException;
-import org.egovframe.rte.fdl.idgnr.EgovIdGnrService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,8 +22,8 @@ class BBSAttributeManageDAOTest {
 	@Autowired
 	BBSAttributeManageDAO bbsAttributeManageDAO;
 
-	@Autowired
-	EgovIdGnrService egovBBSMstrIdGnrService;
+//	@Autowired
+//	EgovIdGnrService egovBBSMstrIdGnrService;
 
 	@Test
 	void deleteBBSMasterInf() {
@@ -55,65 +52,74 @@ class BBSAttributeManageDAOTest {
 		// given
 		BoardMaster boardMaster = new BoardMaster();
 
-		try {
-			boardMaster.setBbsId(egovBBSMstrIdGnrService.getNextStringId());
-		} catch (FdlException e) {
-			throw new BaseRuntimeException(e);
-		}
+//		try {
+//			boardMaster.setBbsId(egovBBSMstrIdGnrService.getNextStringId());
+//		} catch (FdlException e) {
+//			throw new BaseRuntimeException(e);
+//		}
 
-		String now = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+		LocalDateTime now = LocalDateTime.now();
+		String now2 = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+		String now3 = now.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
-		boardMaster.setBbsNm("test 이백행 게시판명 " + now);
+		boardMaster.setBbsId("TEST0_" + now2);
 
-		boardMaster.setPosblAtchFileSize("0");
+		boardMaster.setBbsNm("test 이백행 게시판명 " + now3);
+
+//		boardMaster.setPosblAtchFileSize("0");
+		boardMaster.setPosblAtchFileSize(null);
 
 		int expected = 0;
 
 		// when
 		int result = bbsAttributeManageDAO.insertBBSMasterInf(boardMaster);
 
+		// then
 		if (log.isDebugEnabled()) {
 			log.debug("actual, expected={}, {}", result, expected);
 		}
 
-		// then
 		assertThat(result).isGreaterThan(expected);
 	}
 
 	BoardMaster testData() {
 		// given
-		BoardMaster testData = new BoardMaster();
+		BoardMaster boardMaster = new BoardMaster();
 
 		// 게시판마스터
-		try {
-			testData.setBbsId(egovBBSMstrIdGnrService.getNextStringId());
-		} catch (FdlException e) {
-			throw new BaseRuntimeException(e);
-		}
+//		try {
+//			boardMaster.setBbsId(egovBBSMstrIdGnrService.getNextStringId());
+//		} catch (FdlException e) {
+//			throw new BaseRuntimeException(e);
+//		}
 
-		String now = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+		LocalDateTime now = LocalDateTime.now();
+		String now2 = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+		String now3 = now.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
-		testData.setBbsNm("test 이백행 게시판명 " + now);
+		boardMaster.setBbsId("TEST0_" + now2);
 
-		testData.setPosblAtchFileSize("0");
+		boardMaster.setBbsNm("test 이백행 게시판명 " + now3);
+
+		boardMaster.setPosblAtchFileSize("0");
 
 		// 사용자정보
-		testData.setUniqId("USRCNFRM_00000000000");
-//		testData.setUniqId("USRCNFRM_00000000001");
+		boardMaster.setUniqId("USRCNFRM_00000000000");
+//		boardMaster.setUniqId("USRCNFRM_00000000001");
 
 		int expected = 0;
 
 		// when
-		int result = bbsAttributeManageDAO.insertBBSMasterInf(testData);
+		int result = bbsAttributeManageDAO.insertBBSMasterInf(boardMaster);
 
+		// then
 		if (log.isDebugEnabled()) {
 			log.debug("actual, expected={}, {}", result, expected);
 		}
 
-		// then
 //		assertThat(result).isGreaterThan(expected);
 
-		return testData;
+		return boardMaster;
 	}
 
 }

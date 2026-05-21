@@ -149,6 +149,7 @@ assertThat(result).isEqualTo(expected);
 2. 사용 VO 분석
 3. Mapper SQL 분석
 4. 기존 테스트 패턴 분석
+   - src/test/java/egovframework/com/cop/bbs/service/impl/BBSAttributeManageDAOTest.java
 5. 테스트 메서드 생성
 6. 테스트 데이터 생성
 7. import 정리
