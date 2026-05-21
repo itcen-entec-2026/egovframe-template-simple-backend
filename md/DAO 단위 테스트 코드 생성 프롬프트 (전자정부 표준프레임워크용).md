@@ -229,3 +229,12 @@ BBSAttributeManageDAO 단위 테스트 코드 생성
 - src/main/java/egovframework
 - src/main/resources/egovframework
 ```
+
+```
+@"md/cen-단위 테스트 코드 생성_v0.1_이백행_2026-05-21.md" 컨텍스트 반영
+```
+
+C:\Users\leebh\.gemini
+```
+C:\Users\leebh\.qwen
+```

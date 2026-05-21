@@ -14,16 +14,15 @@
 # 공통 규칙
 
 ## 기본 원칙
-- 기존 프로젝트의 테스트 코드 스타일과 패턴을 최대한 유지한다.
-- 기존 테스트 코드가 존재하면 해당 패턴을 우선 적용한다.
-- 테스트 메서드는 대상 DAO 메서드 선언 순서대로 작성한다.
+- @src/test/java/egovframework/com/cop/bbs/service/impl/BBSAttributeManageDAOTest.java 기존 테스트 코드 스타일과 패턴을 동일하게 우선 적용한다.
+<!-- - 테스트 메서드는 대상 DAO 메서드 선언 순서대로 작성한다. -->
 - 테스트 실행 및 실제 검증 수행은 제외한다.
-- 불필요한 설명, 분석, 요약 없이 코드만 생성한다.
+<!-- - 불필요한 설명, 분석, 요약 없이 코드만 생성한다.
 - import 는 사용 클래스 기준으로 자동 정리한다.
 - AssertJ 기반 assertion 사용 가능.
 - 테스트 데이터는 각 테스트 메서드 내부 또는 별도 메서드로 구성한다.
 - 테스트 데이터 생성 시 컬럼 길이/타입 제약사항을 고려한다.
-- 기존 메서드 및 기존 테스트는 삭제하지 않는다.
+- 기존 메서드 및 기존 테스트는 삭제하지 않는다. -->
 
 ---
 
@@ -34,15 +33,15 @@
 - MyBatis 기반 DAO
 - 전자정부 표준프레임워크 DAO
 
-## 테스트 클래스 규칙
+<!-- ## 테스트 클래스 규칙
 - 클래스명: `{DAO명}Test`
 - package 는 기존 DAO 테스트 구조 기준 유지
 - JUnit5 사용
 - `@SpringBootTest` 또는 프로젝트 기존 패턴 유지
 - 필요 시 `@Transactional` 추가
-- 필요 시 `@Rollback` 적용
+- 필요 시 `@Rollback` 적용 -->
 
-예시:
+<!-- 예시:
 
 ```java
 @Transactional
@@ -50,9 +49,9 @@
 class BBSAttributeManageDAOTest {
 
 }
-```
+``` -->
 
----
+<!-- ---
 
 # 테스트 메서드 규칙
 
@@ -69,9 +68,9 @@ class BBSAttributeManageDAOTest {
 @Test
 void selectBoardMasterInf() {
 }
-```
+``` -->
 
----
+<!-- ---
 
 # 테스트 데이터 규칙
 
@@ -88,9 +87,9 @@ BoardMasterVO vo = new BoardMasterVO();
 vo.setBbsId("BBSMSTR_000000000001");
 vo.setBbsNm("테스트게시판");
 vo.setUseAt("Y");
-```
+``` -->
 
----
+<!-- ---
 
 # 제외 규칙
 
@@ -103,9 +102,9 @@ vo.setUseAt("Y");
 
 ## 제외 예시
 - `verify()` 강제 금지
-- 실제 실행 결과 로그 출력 제외
+- 실제 실행 결과 로그 출력 제외 -->
 
----
+<!-- ---
 
 # BeforeEach 규칙
 
@@ -123,9 +122,9 @@ vo.setUseAt("Y");
 void setUp() {
     testBoardMasterVO = new BoardMasterVO();
 }
-```
+``` -->
 
----
+<!-- ---
 
 # Assertion 규칙
 
@@ -139,9 +138,9 @@ assertThat(result).isEqualTo(expected);
 ## 불필요한 검증 제외
 - 상세 비즈니스 검증
 - 화면 연동 검증
-- 통합 테스트 수준 검증
+- 통합 테스트 수준 검증 -->
 
----
+<!-- ---
 
 # 생성 대상 분석 절차
 
@@ -153,18 +152,18 @@ assertThat(result).isEqualTo(expected);
 5. 테스트 메서드 생성
 6. 테스트 데이터 생성
 7. import 정리
-8. 최종 테스트 코드 출력
+8. 최종 테스트 코드 출력 -->
 
----
+<!-- ---
 
 # 우선 적용 패턴
 
 우선순위:
 1. 기존 프로젝트 테스트 코드 패턴
 2. 전자정부 표준프레임워크 일반 패턴
-3. JUnit5 표준 패턴
+3. JUnit5 표준 패턴 -->
 
----
+<!-- ---
 
 # 추가 규칙
 
@@ -180,9 +179,9 @@ assertThat(result).isEqualTo(expected);
 - update 대상 최소 데이터만 구성
 
 ## delete
-- 삭제 조건 데이터만 구성
+- 삭제 조건 데이터만 구성 -->
 
----
+<!-- ---
 
 # 출력 규칙
 
@@ -204,9 +203,9 @@ assertThat(result).isEqualTo(expected);
 class SampleDAOTest {
 }
 ```
-````
+```` -->
 
----
+<!-- ---
 
 # 사용 예시
 
@@ -224,7 +223,7 @@ class SampleDAOTest {
 - 테스트 메서드 순서 유지
 - @Transactional 추가
 - 실행 검증 제외
-```
+``` -->
 
 ---
 
