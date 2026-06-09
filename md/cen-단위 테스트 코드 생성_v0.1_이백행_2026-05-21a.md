@@ -2,7 +2,7 @@
 
 - 테스트 코드 생성 금지
 - 컨텍스트만 적용
-- `@src/test/java/egovframework/com/cop/bbs/service/impl/BBSAttributeManageDAOTest.java` 기존 테스트 코드 스타일과 패턴을 동일하게 우선 적용
+- `@src/test/java/egovframework/let/cop/bbs/service/impl/BBSAttributeManageDAOTest.java` 기존 테스트 코드 스타일과 패턴을 동일하게 우선 적용
 - `@DATABASE/all_sht_ddl_mysql.sql` DDL 분석
 - `@DATABASE/all_sht_data_mysql.sql` DML 분석
 - VO set 데이터타입 및 길이에 맞는 테스트 데이터 사용

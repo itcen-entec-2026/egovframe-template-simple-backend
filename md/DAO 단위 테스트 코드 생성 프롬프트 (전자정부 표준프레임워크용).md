@@ -254,3 +254,25 @@ C:\Users\leebh\.qwen
 ```
 @"md/cen-단위 테스트 코드 생성_v0.1_이백행_2026-05-21a.md"
 ```
+
+2026-06-09(화)
+
+```
+C:\Users\leebh\.qwen
+```
+
+```
+cen
+API KEY : intellicen
+BASE URL : http://10.10.41.160:18000/proxy/v1
+MODEL : CEN-35B
+```
+
+```
+@"md/cen-단위 테스트 코드 생성_v0.1_이백행_2026-05-21a.md"
+```
+
+```
+BBSAttributeManageDAO 단위 테스트 코드 생성
+- 클래스명: `{DAO명}CenTest`
+```
