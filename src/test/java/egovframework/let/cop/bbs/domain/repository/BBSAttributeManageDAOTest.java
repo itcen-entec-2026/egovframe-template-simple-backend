@@ -1,4 +1,4 @@
-package egovframework.let.cop.bbs.service.impl;
+package egovframework.let.cop.bbs.domain.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import egovframework.let.cop.bbs.domain.model.BoardMaster;
-import egovframework.let.cop.bbs.domain.repository.BBSAttributeManageDAO;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
