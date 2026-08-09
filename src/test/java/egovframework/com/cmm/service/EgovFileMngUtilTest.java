@@ -38,6 +38,7 @@ class EgovFileMngUtilTest {
         ReflectionTestUtils.setField(egovFileMngUtil, "allowedExtensionsRaw", ".gif.jpg.jpeg.png.xls.xlsx");
         ReflectionTestUtils.setField(egovFileMngUtil, "propertyService", propertyService);
         ReflectionTestUtils.setField(egovFileMngUtil, "idgenService", idgenService);
+        when(propertyService.getLong("Globals.posblAtchFileSize")).thenReturn(5L * 1024 * 1024);
     }
 
     @DisplayName("parseFileInf 호출 시, 허용된 확장자의 파일이면 FileVO 목록을 반환한다.")
@@ -93,7 +94,7 @@ class EgovFileMngUtilTest {
 
         MultipartFile multipartFile = mock(MultipartFile.class);
         when(multipartFile.getOriginalFilename()).thenReturn("big.png");
-        when(multipartFile.getSize()).thenReturn(11L * 1024 * 1024);
+        when(multipartFile.getSize()).thenReturn(5L * 1024 * 1024 + 1);
 
         Map<String, MultipartFile> files = new LinkedHashMap<>();
         files.put("file", multipartFile);
