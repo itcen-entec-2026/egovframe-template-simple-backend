@@ -1,6 +1,7 @@
 package egovframework.com.jwt;
 
 import egovframework.com.cmm.LoginVO;
+import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -53,6 +54,32 @@ class EgovJwtTokenUtilTest {
         assertEquals("ROLE_USER", result.getGroupNm());
     }
 
+    @DisplayName("토큰에서 LoginVO를 생성할 때, JWT를 한 번만 파싱한다.")
+    @Test
+    void testGetLoginVOFromTokenParsesTokenOnlyOnce() {
+        // given
+        CountingJwtTokenUtil countingJwtTokenUtil = new CountingJwtTokenUtil();
+        ReflectionTestUtils.setField(countingJwtTokenUtil, "secretKeyString",
+                ReflectionTestUtils.getField(jwtTokenUtil, "secretKeyString"));
+
+        LoginVO loginVO = new LoginVO();
+        loginVO.setId("testUser");
+        loginVO.setName("Test User");
+        loginVO.setUserSe("USER");
+        loginVO.setOrgnztId("testOrg");
+        loginVO.setUniqId("testUniqId");
+        loginVO.setGroupNm("ROLE_USER");
+
+        String token = countingJwtTokenUtil.generateToken(loginVO);
+
+        // when
+        LoginVO result = countingJwtTokenUtil.getLoginVOFromToken(token);
+
+        // then
+        assertEquals("testUser", result.getId());
+        assertEquals(1, countingJwtTokenUtil.getParseCount());
+    }
+
     @DisplayName("잘못된 토큰을 입력했을 때, InvalidJwtException 예외가 발생한다.")
     @Test
     void testInvalidTokenReturnsThrowException() {
@@ -78,5 +105,19 @@ class EgovJwtTokenUtilTest {
         assertThrows(InvalidJwtException.class, () -> {
             jwtTokenUtil.getLoginVOFromToken(token);
         });
+    }
+
+    private static class CountingJwtTokenUtil extends EgovJwtTokenUtil {
+        private int parseCount;
+
+        @Override
+        public Claims getAllClaimsFromToken(String token) {
+            parseCount++;
+            return super.getAllClaimsFromToken(token);
+        }
+
+        int getParseCount() {
+            return parseCount;
+        }
     }
 }

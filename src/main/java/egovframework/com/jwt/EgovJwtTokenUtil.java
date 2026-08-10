@@ -62,9 +62,12 @@ public class EgovJwtTokenUtil implements Serializable{
 
 	public String getInfoFromToken(String type, String token) {
 		Claims claims = getClaimFromToken(token);
-	    Object info = claims.get(type);
+		return getInfoFromClaims(type, claims);
+	}
 
-	    return info != null ? info.toString() : null;
+	private String getInfoFromClaims(String type, Claims claims) {
+		Object info = claims.get(type);
+		return info != null ? info.toString() : null;
 	}
 
 	public Claims getClaimFromToken(String token) {
@@ -116,20 +119,21 @@ public class EgovJwtTokenUtil implements Serializable{
 	public LoginVO getLoginVOFromToken(String token) throws InvalidJwtException{
 		LoginVO loginVO = new LoginVO();
 
-        try {
-		    loginVO.setId(getUserIdFromToken(token));
-			loginVO.setName(getInfoFromToken("name", token));
-			loginVO.setUserSe(getUserSeFromToken(token));
-			loginVO.setOrgnztId(getInfoFromToken("orgnztId", token));
-			loginVO.setUniqId(getInfoFromToken("uniqId", token));
-            loginVO.setGroupNm(getInfoFromToken("groupNm", token));
+		try {
+			Claims claims = getClaimFromToken(token);
+			loginVO.setId(getInfoFromClaims("id", claims));
+			loginVO.setName(getInfoFromClaims("name", claims));
+			loginVO.setUserSe(getInfoFromClaims("userSe", claims));
+			loginVO.setOrgnztId(getInfoFromClaims("orgnztId", claims));
+			loginVO.setUniqId(getInfoFromClaims("uniqId", claims));
+			loginVO.setGroupNm(getInfoFromClaims("groupNm", claims));
 
-            if(loginVO.getId() == null) throw new InvalidJwtException("Missing id in token");
-        } catch (IllegalArgumentException e) {
-            throw new InvalidJwtException("Unable to verify JWT Token: " + e.getMessage());
-        } catch (JwtException e) {
-            throw new InvalidJwtException("Unable to verify JWT Token: " + e.getMessage());
-        }
+			if(loginVO.getId() == null) throw new InvalidJwtException("Missing id in token");
+		} catch (IllegalArgumentException e) {
+			throw new InvalidJwtException("Unable to verify JWT Token: " + e.getMessage());
+		} catch (JwtException e) {
+			throw new InvalidJwtException("Unable to verify JWT Token: " + e.getMessage());
+		}
 
 		return loginVO;
 	}
