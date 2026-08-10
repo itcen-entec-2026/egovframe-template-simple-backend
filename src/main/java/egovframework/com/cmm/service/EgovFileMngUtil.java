@@ -49,8 +49,6 @@ public class EgovFileMngUtil {
 
     public static final int BUFF_SIZE = 2048;
 
-    private static final long MAX_FILE_SIZE = 10L * 1024 * 1024; // 10MB
-    
     @Value("${Globals.fileUpload.Extensions:.gif.jpg.jpeg.png.xls.xlsx}")
     private String allowedExtensionsRaw;
 
@@ -105,6 +103,7 @@ public class EgovFileMngUtil {
 	String filePath = "";
 	List<FileVO> result  = new ArrayList<FileVO>();
 	FileVO fvo;
+	long maxFileSize = propertyService.getLong("Globals.posblAtchFileSize");
 
 	while (itr.hasNext()) {
 	    Entry<String, MultipartFile> entry = itr.next();
@@ -142,8 +141,8 @@ public class EgovFileMngUtil {
 
 	    // 파일 크기 검증
 	    long _size = file.getSize();
-	    if (_size > MAX_FILE_SIZE) {
-	        throw new EgovBizException("파일 크기가 허용 한도(10MB)를 초과했습니다.");
+	    if (_size > maxFileSize) {
+			throw new EgovBizException("파일 크기가 허용 한도(" + maxFileSize + "바이트)를 초과했습니다.");
 	    }
 
 	    // 파일명 정규화 (경로 탈출·제어문자 제거)

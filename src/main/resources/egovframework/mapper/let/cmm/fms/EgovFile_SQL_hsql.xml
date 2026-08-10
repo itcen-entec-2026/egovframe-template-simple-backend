@@ -148,7 +148,7 @@
 					b.STRE_FILE_NM LIKE '%' || #{searchWrd} || '%' 		
 			</if>
 			<if test="searchCnd == &quot;orignlFileNm&quot;">AND
-					b.ORIGNL_FILE_NM LIKE '%' || #{searchWrd} '%'  		
+					b.ORIGNL_FILE_NM LIKE '%' || #{searchWrd} || '%'  		
 			</if>	 		
  	</select>
  	
