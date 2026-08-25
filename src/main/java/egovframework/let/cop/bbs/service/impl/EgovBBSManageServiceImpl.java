@@ -65,8 +65,12 @@ public class EgovBBSManageServiceImpl extends EgovAbstractServiceImpl implements
 	 */
 	@Override
 	public void deleteBoardArticle(BbsManageDeleteBoardRequestDTO bbsDeleteBoardRequestDTO, LoginVO user) throws Exception {
-		String atchFileId = bbsDeleteBoardRequestDTO.getAtchFileId();
 		BoardVO vo = bbsDeleteBoardRequestDTO.toBoardMaster(bbsDeleteBoardRequestDTO, user.getUniqId());
+
+		// 첨부파일 그룹은 요청값이 아니라 저장된 게시물에서 읽는다.
+		BoardVO storedArticle = bbsMngDAO.selectBoardArticle(vo);
+		String atchFileId = (storedArticle == null) ? null : storedArticle.getAtchFileId();
+
 		bbsMngDAO.deleteBoardArticle(vo);
 		
 		if (atchFileId != null && !atchFileId.trim().isEmpty()) {
