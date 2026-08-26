@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.egovframe.rte.fdl.cmmn.exception.FdlException;
 import org.egovframe.rte.fdl.idgnr.EgovIdGnrService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,13 +20,31 @@ import egovframework.let.cop.bbs.domain.repository.BBSAttributeManageDAO;
 import egovframework.let.cop.bbs.domain.repository.BBSManageDAO;
 
 /**
- * NttNO 테스트
+ * 
+ * description    : 답글 등록(replyBoardArticle) 쿼리의 NTT_NO 하드코딩 결함 검증 테스트
+ * 
+ * packageName    : egovframework.let.cop.bbs.service.impl
+ * fileName       : EgovBBSManageServiceReplyBoardArticleNttNoTest
+ * author         : kimminsol
+ * date           : 2026.08.26
+ * ===========================================================
+ * DATE              AUTHOR             NOTE
+ * ————————————————————————————————————————————————————————————
+ * 2026.08.26       kimminsol          최초 생성
+ */
+
+/**
+ * 답글 등록 시 게시글 번호(NTT_NO) 바인딩 결함 검증
  *
- * selectKey(order="BEFORE")로 계산한 nttNo가 VALUES절에서 쓰이지 않고 리터럴 1로
- * 하드코딩되어 있던 버그를 검증한다. BBSManageDAO#replyBoardArticle(Board) 는
- * INSERT 직후 getParentNttNo/updateOtherNttNo/updateNttNo로 NTT_NO를 다시 덮어써서
- * 최종 결과만 보면 버그 유무와 무관하게 같아지므로, 이 보정 로직을 거치지 않고
- * INSERT문만 직접 실행해 실제로 저장된 값을 확인한다.
+ * selectKey(order="BEFORE")를 통해 산출된 nttNo가 VALUES 절에 바인딩되지 않고
+ * 리터럴 '1'로 하드코딩되어 있던 결함을 검증한다.
+ * 
+ * 서비스 로직(BBSManageDAO#replyBoardArticle)에서는 INSERT 직후 부모글 기준
+ * NTT_NO 재설정 및 UPDATE 작업(getParentNttNo/updateOtherNttNo/updateNttNo)을 수행하므로,
+ * 전체 프로세스 수행 후에는 결함 유무와 관계없이 최종 데이터가 동일해집니다.
+ * 따라서 후속 보정 로직을 거치지 않고 INSERT 단독 실행 시 DB에 실제로 저장되는
+ * NTT_NO 값을 직접 조회하여 결함 여부를 검증합니다.
+ * 
  */
 @SpringBootTest
 class EgovBBSManageServiceReplyBoardArticleNttNoTest {
@@ -84,12 +101,19 @@ class EgovBBSManageServiceReplyBoardArticleNttNoTest {
         Long firstReplyNttNo = fetchNttNo(bbsId, firstReply.getNttId());
         Long secondReplyNttNo = fetchNttNo(bbsId, secondReply.getNttId());
 
+        System.out.println("======================================");
+        System.out.println("bbsId               = " + bbsId);
+        System.out.println("parent  nttId/nttNo = " + parent.getNttId() + " / " + parent.getNttNo());
+        System.out.println("reply1  nttId/nttNo = " + firstReply.getNttId() + " / " + firstReplyNttNo);
+        System.out.println("reply2  nttId/nttNo = " + secondReply.getNttId() + " / " + secondReplyNttNo);
+        System.out.println("======================================");
+
         assertNotEquals(1L, firstReplyNttNo, "selectKey로 계산한 값 대신 하드코딩된 1이 저장되면 안 된다.");
         assertEquals(2L, firstReplyNttNo);
         assertEquals(3L, secondReplyNttNo);
     }
 
-    private Board newReply(String bbsId, Board parent) throws FdlException {
+    private Board newReply(String bbsId, Board parent) throws Exception {
         Board reply = new Board();
         reply.setBbsId(bbsId);
         reply.setNttId(egovNttIdGnrService.getNextLongId());
