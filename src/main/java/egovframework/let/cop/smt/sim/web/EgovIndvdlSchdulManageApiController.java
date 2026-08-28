@@ -55,6 +55,7 @@ import lombok.RequiredArgsConstructor;
  *  -------    --------    ---------------------------
  *  2009.04.10  장동한          최초 생성
  *  2011.05.31  JJY           경량환경 커스터마이징버전 생성
+ *  2026.08.27  content_j     /schedule/wee (EgovIndvdlSchdulManageWeekList) 파라미터 없이 호출 시 NPE 발생하던 버그 수정
  * </pre>
  * @author 조재영
  * @version 1.0
@@ -496,29 +497,35 @@ public class EgovIndvdlSchdulManageApiController {
 		String strYear = searchVO.getYear();
 		String strMonth = searchVO.getMonth();
 		String strDate = searchVO.getDate();
-		
+
+		int iNowYear = calNow.get(Calendar.YEAR);
 		int iNowMonth = calNow.get(Calendar.MONTH);
+		int iNowDate = calNow.get(Calendar.DATE);
 
 		if (strYear != null) {
+			iNowYear = Integer.parseInt(strYear);
 			iNowMonth = Integer.parseInt(strMonth);
+			iNowDate = Integer.parseInt(strDate);
 		}
-		
+
 		//프론트에서 넘어온 값은 1월을 0으로 간주하므로 1달 더해 줌
 		int realMonth = iNowMonth + 1;
-		strMonth =  String.valueOf(realMonth);
+		strYear = String.valueOf(iNowYear);
+		strMonth = String.valueOf(realMonth);
+		strDate = String.valueOf(iNowDate);
 
 		//자릿수 보정
 		strMonth = (strMonth.length() == 1) ? "0" + strMonth : strMonth;
 		strDate = (strDate.length() == 1) ? "0" + strDate : strDate;
-		
+
 		//시작일자
 		String schdulBgnde = strYear + strMonth + strDate;
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		Calendar calNext = Calendar.getInstance();
-		
-		calNext.set(Integer.parseInt(strYear), Integer.parseInt(strMonth)-1, Integer.parseInt(strDate));
-		
+
+		calNext.set(iNowYear, iNowMonth, iNowDate);
+
 		calNext.add(Calendar.DATE, 6);
 		
 		//종료일자
