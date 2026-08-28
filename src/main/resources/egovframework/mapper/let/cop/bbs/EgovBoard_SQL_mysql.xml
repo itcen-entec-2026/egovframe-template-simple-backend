@@ -113,7 +113,7 @@
 			( #{nttId}, #{bbsId}, #{nttSj}, #{nttCn}, #{sortOrdr}, 
 			  #{ntcrId}, #{ntcrNm}, #{password}, #{inqireCo}, 
 			  #{ntceBgnde}, #{ntceEndde}, #{replyAt}, 
-			  #{parnts}, 1, #{replyLc}, #{atchFileId},
+			  #{parnts}, #{nttNo}, #{replyLc}, #{atchFileId},
 			  #{frstRegisterId}, SYSDATE(), 'Y'
 			 )			
 		
